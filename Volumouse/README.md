@@ -4,6 +4,12 @@
 
 [Download :inbox_tray:](https://github.com/pzim-devdata/Tools-for-Linux/releases/download/v1.0.0/Volumouse.zip)
 
+## Fork Notes
+
+This fork of Pzim's repository includes a modified Volumouse script that: 
+- Fixes a channel imbalance issue that I was experiencing when scrolling too fast.
+- Changes the activation region to include the entire taskbar instead of just the screen corners.
+- Replaces the depreciated os.system with subsystem.call
 
 ## Description :
 
@@ -11,7 +17,7 @@ A Python 3 program that allows you to change the volume with the mouse wheel usi
 
 There are two files: one for the LEFT side and one for the RIGHT side of the screen. Like that, if you have two sound systems like an HiFi and an HDMI screen, you can change the volume for both.
 
-The screen size by default is 1920 * 1080 but you can change it by opening Python files with a notepad. You can also change the size of the detection box in the corners of the screen.
+The screen size by default is 1920 * 1080 (modified script is set to 2560*1440) but you can change it by opening Python files with a notepad. You can also change the size of the detection box in the corners of the screen.
 
 
 
