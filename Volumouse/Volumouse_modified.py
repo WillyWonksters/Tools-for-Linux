@@ -11,19 +11,32 @@ from Xlib import X, display
 from Xlib.ext import record
 from Xlib.protocol import rq
 
-Screen_resolution = (2560,1440) # write here your screen resolution
+#*****************************************
+#-----------USER PARAMETERS--------------- 
+#*****************************************
+Screen_resolution = (2560,1440) # write here your screen resolution, this is used to calculate whether or not your mouse is in the activation region
 
 Bottom_area = 50 # write here the number of pixels at the bottom of your screen that will represent the activation region.
 
+Volume_step_size = 2 # Percent
+
+
+
 # Let's set up the commands
+# The volume step size will be an argument the volume controlling function. It needs to be formatted as a string, concatenated with %+ and %-
+# This is done outside of the function so that it doesn't need to be re-calculated each time the function is called.
+Step_up_arg = str(Volume_step_size)+"%+"
+Step_down_arg = str(Volume_step_size)+"%-"
+
 def volume_up():
     
-    call("amixer set Master 3%+",shell=True)
-
+    call(["amixer","set","Master",Step_up_arg])
 
 def volume_down():
     
-    call("amixer set Master 3%-",shell=True)
+    call(["amixer","set","Master",Step_down_arg])
+
+
 
 
 record_dpy = display.Display()
@@ -57,11 +70,11 @@ def record_callback(reply):
 
                print ("Bottom area detected")
 
-               if event.detail is 4 : # event.detail 4 means wheel up event
+               if event.detail == 4 : # event.detail 4 means wheel up event
                   print ("volume up!") 
                   volume_up() 
 
-               if event.detail is 5 : # event.detail 5 means wheel down event
+               if event.detail == 5 : # event.detail 5 means wheel down event
                   print ("volume down!") 
                   volume_down() 
                                    
